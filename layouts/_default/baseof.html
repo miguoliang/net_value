@@ -151,7 +151,13 @@
     var myChart = echarts.init(chartDom);
     var option = {
         title: {
-            text: '禅宽1号'
+            text: '禅宽1号',
+            subtext: '实盘测试中',
+            textAlign: 'center',
+            left: 'center'
+        },
+        grid: {
+            top: 80
         },
         toolbox: {
             feature: {
@@ -164,12 +170,29 @@
         },
         yAxis: {
             type: 'value',
-            scale: true
+            scale: true,
+            interval: 0.01,
+            max: function (value) {
+                return Math.ceil(value.max * 100) / 100 + 0.01
+            },
+            min: function (value) {
+                return Math.floor(value.min * 100) / 100 - 0.01
+            }
         },
         series: [
             {
                 data: data_y,
-                type: 'line'
+                type: 'line',
+                label: {
+                    show: true,
+                    formatter: function (params) {
+                        if (params.dataIndex === data_y.length - 1) {
+                            return Math.floor(params.data * 10000 + 0.5) / 10000
+                        } else {
+                            return ''
+                        }
+                    }
+                }
             }
         ]
     };
