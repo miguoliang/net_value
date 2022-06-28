@@ -155,8 +155,19 @@
             subtext: '追求稳定且长久的绝对收益，无值守情况下的全自动交易，实盘测试中',
             itemGap: 20
         },
+        tooltip: {
+            trigger: 'axis',
+            valueFormatter: (value) => value.toFixed(4)
+        },
+        legend: {
+            data: ['净值曲线']
+        },
         grid: {
-            top: 100
+            top: 100,
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
         },
         toolbox: {
             feature: {
@@ -165,7 +176,8 @@
         },
         xAxis: {
             type: 'category',
-            data: data_x
+            data: data_x,
+            boundaryGap: false,
         },
         yAxis: {
             type: 'value',
